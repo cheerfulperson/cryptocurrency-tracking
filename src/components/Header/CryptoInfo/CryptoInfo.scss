@@ -1,0 +1,14 @@
+.crypto-info {
+  span {
+    display: inline-block;
+    margin: 0 0 0 8px;
+  }
+
+  &__code {
+    font-weight: 600;
+  }
+
+  &__price {
+    color: #3a3a3a;
+  }
+}
