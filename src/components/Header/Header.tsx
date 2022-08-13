@@ -4,6 +4,7 @@ import Button from '../Button/Button'
 import List from '../List/List'
 import ListItem from '../ListItem/ListItem'
 import CryptoInfo from './CryptoInfo/CryptoInfo'
+import { AiOutlineLeft } from 'react-icons/ai'
 import './Header.scss'
 
 function Header() {
@@ -30,14 +31,18 @@ function Header() {
   return (
     <header className='header'>
       <article className='header__container'>
-        <Button>s</Button>
-        <List>
-          {cryptocurrencies.map((cryptoInfo) => (
-            <ListItem key={cryptoInfo.cryptoCode}>
-              <CryptoInfo info={cryptoInfo} />
-            </ListItem>
-          ))}
-        </List>
+        <article className='header__side'>
+          <Button type='custom'>
+            <AiOutlineLeft />
+          </Button>
+          <List>
+            {cryptocurrencies.map((cryptoInfo) => (
+              <ListItem key={cryptoInfo.cryptoCode}>
+                <CryptoInfo info={cryptoInfo} />
+              </ListItem>
+            ))}
+          </List>
+        </article>
       </article>
     </header>
   )
