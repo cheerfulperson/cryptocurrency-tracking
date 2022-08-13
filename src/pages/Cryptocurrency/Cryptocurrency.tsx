@@ -34,7 +34,7 @@ function Cryptocurrency() {
 
   React.useEffect(() => {
     if (!isCryptoHistoryupdated) {
-        setIsCryptoHistoryupdated(true)
+      setIsCryptoHistoryupdated(true)
       cryptoHistory.forEach((value) => {
         const time = new Date(value.time)
         value.priceUsd = Number(value.priceUsd).toFixed(getToFixedNumber(value.priceUsd))

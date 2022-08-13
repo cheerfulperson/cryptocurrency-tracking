@@ -2,11 +2,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    padding: 0 10px;
+
+    &__block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 260px;
+        @media all and (max-width: 600px) {
+            overflow-x: auto;
+            flex-wrap: wrap;
+            margin: 0 10px;
+        }
+    }
 
     &__text-block {
         font-size: 14px;
-        margin: 20px;
-
+        margin: 0 20px;
+        min-width: 0;
+        @media all and (max-width: 600px) {
+            font-size: 12px;
+            margin: 0 5px;
+        }
+        @media all and (max-width: 400px) {
+            font-size: 10px;
+            margin: 5px;
+        }
         span {
             display: block;
 
