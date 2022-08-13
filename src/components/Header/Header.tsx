@@ -5,7 +5,7 @@ import List from '../List/List'
 import ListItem from '../ListItem/ListItem'
 import CryptoInfo from './CryptoInfo/CryptoInfo'
 import { AiOutlineLeft } from 'react-icons/ai'
-import { useLocation } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { UserData } from '../../models/user.model'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import Avatar from '../Avatar/Avatar'
@@ -15,6 +15,7 @@ import './Header.scss'
 
 function Header() {
   const location = useLocation()
+  const history = useNavigate()
   const isHomePathName = location.pathname === '' || location.pathname === '/'
   const cryptocurrencies: HeaderCryptoInfo[] = [
     {
@@ -47,7 +48,7 @@ function Header() {
       <article className='header__container'>
         <article className='header__side'>
           {!isHomePathName && (
-            <Button type='custom'>
+            <Button type='custom' onClick={() => history('')}>
               <AiOutlineLeft />
             </Button>
           )}

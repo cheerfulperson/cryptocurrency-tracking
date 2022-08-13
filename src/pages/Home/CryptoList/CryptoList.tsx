@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useNavigate } from 'react-router-dom'
 import List from '../../../components/List/List'
 import ListItem from '../../../components/ListItem/ListItem'
 import { CryptoAssets } from '../../../models/crypto.model'
@@ -11,6 +12,7 @@ interface CryptoListProps {
 }
 
 function CryptoList({ cryptoDataAssets, ...props }: CryptoListProps) {
+  const history = useNavigate()
   const getToFixedNumber = (price: number | string) => {
     const absPrice = Math.abs(+price)
     if (absPrice > 1000) {
@@ -28,10 +30,22 @@ function CryptoList({ cryptoDataAssets, ...props }: CryptoListProps) {
     return +price > 0 ? '#19e219' : '#ff0000'
   }
 
+  function goToPage(currencyId: string) {
+    history(`/cryptocurrency/${currencyId}`)
+  }
+
   return (
     <>
       {cryptoDataAssets.map((cryptoInfo) => (
-        <List key={cryptoInfo.id} className='crypto-row' styles={{ width: '100%' }} {...props}>
+        <List
+          key={cryptoInfo.id}
+          className='crypto-row'
+          styles={{ width: '100%' }}
+          {...props}
+          onClick={() => {
+            goToPage(cryptoInfo.id)
+          }}
+        >
           <ListItem className='crypto-row__item crypto-row__item-name'>
             <span>{cryptoInfo.name}</span>
           </ListItem>

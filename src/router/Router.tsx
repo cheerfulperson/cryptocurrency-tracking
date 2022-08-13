@@ -4,6 +4,7 @@ import { RoutePathes } from './routes'
 
 const Home = React.lazy(() => import('../pages/home/Home'))
 const NotFound = React.lazy(() => import('../pages/NotFound/NotFound'))
+const Cryptocurrency = React.lazy(() => import('../pages/Cryptocurrency/Cryptocurrency'))
 
 interface IAppRouterProps {
   location: Location
@@ -24,7 +25,7 @@ function AppRouter({ location: appLocation }: IAppRouterProps) {
         path={RoutePathes.Cryptocurrency}
         element={
           <React.Suspense fallback={<>error</>}>
-            <Home />
+            <Cryptocurrency />
           </React.Suspense>
         }
       />
