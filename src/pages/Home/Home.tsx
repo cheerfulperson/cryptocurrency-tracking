@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { CryptoAssets } from '../../models/crypto.model'
+import { CryptoAssets } from '../../models/crypto.models'
 import { cryptoAssets } from './mockdata'
 import CryptoList from './CryptoList/CryptoList'
 import './Home.scss'

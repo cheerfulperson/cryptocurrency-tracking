@@ -2,7 +2,8 @@ import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import List from '../../../components/List/List'
 import ListItem from '../../../components/ListItem/ListItem'
-import { CryptoAssets } from '../../../models/crypto.model'
+import { CryptoAssets } from '../../../models/crypto.models'
+import { getPriceColor, getToFixedNumber } from '../../../utils/cummon'
 import './CryptoList.scss'
 
 interface CryptoListProps {
@@ -13,22 +14,6 @@ interface CryptoListProps {
 
 function CryptoList({ cryptoDataAssets, ...props }: CryptoListProps) {
   const history = useNavigate()
-  const getToFixedNumber = (price: number | string) => {
-    const absPrice = Math.abs(+price)
-    if (absPrice > 1000) {
-      return 2
-    }
-    if (absPrice > 1) {
-      return 4
-    }
-    if (absPrice > 0.01) {
-      return 6
-    }
-    return 8
-  }
-  const getPriceColor = (price: number | string) => {
-    return +price > 0 ? '#19e219' : '#ff0000'
-  }
 
   function goToPage(currencyId: string) {
     history(`/cryptocurrency/${currencyId}`)

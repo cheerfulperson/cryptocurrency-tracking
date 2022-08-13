@@ -11,3 +11,8 @@ export interface CryptoAssets {
   changePercent24Hr: number | string
   vwap24Hr: number | string
 }
+
+export interface CryptoHistory {
+  priceUsd: string
+  time: number | string
+}

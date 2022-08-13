@@ -1,33 +1,40 @@
 import * as React from 'react'
-import { CryptoAssets } from '../../../models/crypto.model'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
+import Button from '../../../components/Button/Button'
+import { CryptoAssets } from '../../../models/crypto.models'
+import { getToFixedNumber } from '../../../utils/cummon'
+import './CryptocurrencyHeader.scss'
 
-interface CryptocurrencyHeaderProps{
-    cryptoInfo: CryptoAssets
+interface CryptocurrencyHeaderProps {
+  cryptoInfo: CryptoAssets
 }
 
-function CryptocurrencyHeader({cryptoInfo}: CryptocurrencyHeaderProps) {
-
+function CryptocurrencyHeader({ cryptoInfo }: CryptocurrencyHeaderProps) {
+  const { name, symbol, priceUsd, changePercent24Hr, vwap24Hr, volumeUsd24Hr } = cryptoInfo
   return (
     <article className='cryptocurrency-header'>
       <h2 className='cryptocurrency-header__name'>
-        <span>{cryptoInfo.name}</span>/<span>{cryptoInfo.symbol}</span>
+        <span>{name}</span>/<span>{symbol}</span>
       </h2>
-      <p className=''>
+      <p className='cryptocurrency-header__text-block'>
         <span>Last price:</span>
-        <span>{cryptoInfo.priceUsd}</span>
+        <span>{Number(priceUsd).toFixed(getToFixedNumber(priceUsd))}</span>
       </p>
-      <p className=''>
+      <p className='cryptocurrency-header__text-block'>
         <span>Daily change:</span>
-        <span>{cryptoInfo.changePercent24Hr}</span>
+        <span>{Number(changePercent24Hr).toFixed(getToFixedNumber(changePercent24Hr))}</span>
       </p>
-      <p className=''>
+      <p className='cryptocurrency-header__text-block'>
         <span>Today`s open:</span>
-        <span>{cryptoInfo.vwap24Hr}</span>
+        <span>{Number(vwap24Hr).toFixed(getToFixedNumber(vwap24Hr))}</span>
       </p>
-      <p className=''>
+      <p className='cryptocurrency-header__text-block'>
         <span>24h volume:</span>
-        <span>{cryptoInfo.volumeUsd24Hr}</span>
+        <span>{Number(volumeUsd24Hr).toFixed(getToFixedNumber(volumeUsd24Hr))}</span>
       </p>
+      <Button type='custom'>
+        <AiOutlinePlusCircle style={{width: '25px', height: '25px'}}/>
+      </Button>
     </article>
   )
 }
