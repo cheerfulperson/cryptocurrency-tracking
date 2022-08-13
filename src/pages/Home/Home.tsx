@@ -1,28 +1,16 @@
 import * as React from 'react'
 import { CryptoAssets } from '../../models/crypto.model'
 import { cryptoAssets } from './mockdata'
+import CryptoList from './CryptoList/CryptoList'
 import './Home.scss'
-import List from '../../components/List/List'
-import ListItem from '../../components/ListItem/ListItem'
+import Button from '../../components/Button/Button'
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
 
 function Home() {
+  const [page, setPage] = React.useState<number>(0)
   const cryptoDataAssets: CryptoAssets[] = cryptoAssets
-  const getToFixedNumber = (price: number | string) => {
-    const absPrice = Math.abs(+price)
-    if (absPrice > 1000) {
-      return 2
-    }
-    if (absPrice > 1) {
-      return 4
-    }
-    if (absPrice > 0.01) {
-      return 6
-    }
-    return 8;
-  }
-  const getPriceColor = (price: number | string) => {
-    return +price > 0 ? '#19e219' : '#ff0000'
-  }
+  const dataAssets = cryptoDataAssets.slice(page * 10, page * 10 + 10)
+  const pages = Math.ceil(cryptoDataAssets.length / 10)
 
   return (
     <section className='home'>
@@ -30,34 +18,19 @@ function Home() {
       <p className='home__subtitle'>
         Buy and sell 250+ cryptocurrencies with 20+ fiat currencies using bank transfers or your credit/debit card.
       </p>
+      <article className='home__pagination'>
+        <Button type='custom' onClick={() => setPage(page - 1 < 0 ? pages - 1 : page - 1)}>
+          <AiOutlineLeft />
+        </Button>
+        <p className='home__pages'>
+          {page + 1} / {pages}
+        </p>
+        <Button type='custom' onClick={() => setPage(page + 2 > pages ? 0 : page + 1)}>
+          <AiOutlineRight />
+        </Button>
+      </article>
       <article className='home__currency-table'>
-        {cryptoDataAssets.map((cryptoInfo) => (
-          <List key={cryptoInfo.id} className='crypto-row' styles={{ width: '100%' }}>
-            <ListItem className='crypto-row__item crypto-row__item-name'>
-              <span>{cryptoInfo.name}</span>
-            </ListItem>
-            <ListItem className='crypto-row__item crypto-row__item-symbol'>
-              <span>{cryptoInfo.symbol}</span>
-            </ListItem>
-            <ListItem
-              className='crypto-row__item crypto-row__item-price'
-              styles={{ color: getPriceColor(cryptoInfo.changePercent24Hr) }}
-            >
-              <span>${Number(cryptoInfo.priceUsd).toFixed(getToFixedNumber(cryptoInfo.changePercent24Hr))}</span>
-            </ListItem>
-            <ListItem
-              className='crypto-row__item'
-              styles={{ color: getPriceColor(cryptoInfo.changePercent24Hr) }}
-            >
-              <span>
-                {Number(cryptoInfo.changePercent24Hr).toFixed(getToFixedNumber(cryptoInfo.changePercent24Hr))}
-              </span>
-            </ListItem>
-            <ListItem className='crypto-row__item crypto-row__item-market'>
-              <span>${Number(cryptoInfo.marketCapUsd).toFixed(getToFixedNumber(cryptoInfo.marketCapUsd))}</span>
-            </ListItem>
-          </List>
-        ))}
+        <CryptoList cryptoDataAssets={dataAssets} />
       </article>
     </section>
   )
