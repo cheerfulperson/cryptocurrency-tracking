@@ -1,4 +1,4 @@
-.crypto-info {
+.profile-info {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,11 +10,11 @@
     margin: 0 0 0 8px;
   }
 
-  &__code {
+  &__value {
     font-weight: 600;
   }
 
-  &__price {
+  &__currency {
     color: #3a3a3a;
   }
 

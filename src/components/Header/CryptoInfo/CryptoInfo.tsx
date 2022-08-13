@@ -12,7 +12,7 @@ function CryptoInfo({ info }: CryptoInfoProps) {
   return (
     <p className='crypto-info'>
       <span className='crypto-info__code'>{info.cryptoCode}</span>
-      <span className='crypto-info__price'>{` ${info.currency}${info.price}`}</span>
+      <span className='crypto-info__price'>{` ${info.currencySympol}${info.price}`}</span>
       <span className='crypto-info__profit' style={{ color: profitColor }}>
         {` ${profitSign}${info.profit}`}%
       </span>
