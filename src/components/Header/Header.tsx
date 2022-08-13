@@ -41,7 +41,7 @@ function Header() {
     currencyCode: 'USD',
     value: 134.23,
     oldValue: 122.93,
-    cryptoData: []
+    cryptoData: [],
   }
   return (
     <header className='header'>
@@ -61,8 +61,8 @@ function Header() {
           </List>
         </article>
         <article className='header__side'>
-          <ProfileInfo info={userData}/>
-          <Avatar src={userImg}/>
+          <ProfileInfo info={userData} />
+          <Avatar src={userImg} styles={{ margin: '0 0 0 10px' }} />
         </article>
       </article>
     </header>
