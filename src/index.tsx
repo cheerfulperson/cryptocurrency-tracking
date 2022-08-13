@@ -1,6 +1,14 @@
 import * as React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { render } from 'react-dom'
 
 import App from './app/App'
 
-render(<App />, document.getElementById('root'))
+import './global.scss'
+
+render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById('root'),
+)
