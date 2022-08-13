@@ -5,10 +5,13 @@ import List from '../List/List'
 import ListItem from '../ListItem/ListItem'
 import CryptoInfo from './CryptoInfo/CryptoInfo'
 import { AiOutlineLeft } from 'react-icons/ai'
-import './Header.scss'
 import { useLocation } from 'react-router'
 import { UserData } from '../../models/user.model'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
+import Avatar from '../Avatar/Avatar'
+
+import userImg from '../../assets/avatar.png'
+import './Header.scss'
 
 function Header() {
   const location = useLocation()
@@ -58,6 +61,7 @@ function Header() {
         </article>
         <article className='header__side'>
           <ProfileInfo info={userData}/>
+          <Avatar src={userImg}/>
         </article>
       </article>
     </header>

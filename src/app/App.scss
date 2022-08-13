@@ -1,9 +1,4 @@
 .main {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  min-height: 100vh;
-
   &__router-layer {
     position: absolute;
     width: 100%;

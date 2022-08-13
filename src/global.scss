@@ -5,18 +5,11 @@
 }
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
   font-family: 'Montserrat', sans-serif;
   color: #000000;
   margin: 0;
   padding: 0;
-}
-
-.main {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  min-height: 100vh;
 }
 
 h1,

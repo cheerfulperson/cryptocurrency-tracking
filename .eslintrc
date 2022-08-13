@@ -25,7 +25,8 @@
     "prettier"
   ],
   "ignorePatterns": [
-    "webpack.*"
+    "webpack.*",
+    "*.d.ts"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
