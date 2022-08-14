@@ -1,8 +1,14 @@
-import { CryptoInfo } from './crypto-info.model'
+import { CryptoAssets } from './crypto.models'
+
+export interface UsersCrypto {
+  amount: number
+  purchasePrice: number
+  crypto: CryptoAssets
+}
 
 export interface UserData {
   value: number
   oldValue: number
   currencyCode: string
-  cryptoData?: CryptoInfo[]
+  cryptoData?: UsersCrypto[]
 }

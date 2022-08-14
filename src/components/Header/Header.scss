@@ -31,3 +31,67 @@ $max-width: 1440px;
     }
   }
 }
+
+.user-panel {
+  position: relative;
+  width: 90%;
+  height: 90%;
+
+  &__info {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+  }
+
+  &__title {
+    font-size: 3em;
+    margin: 20px;
+    @media all and (max-width: 724px), (max-height: 500px) {
+      font-size: 2em;
+      margin: 10px;
+    }
+  }
+
+  &__subtext {
+    margin: 0;
+    @media all and (max-width: 900px) {
+      font-size: 0.6em;
+    }
+    @media all and (max-width: 724px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__currency-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 0;
+    height: 100%;
+    overflow-y: auto;
+    margin: 10px;
+  }
+
+  &__close-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+}
+
+.profile-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 250px;
+  height: 300px;
+  box-shadow: 0px 0px 3px #8282825e;
+  border-radius: 10px;
+  margin: 10px;
+
+  &__item {
+    padding: 0 5px;
+    font-size: 16px;
+  }
+}

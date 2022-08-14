@@ -1,3 +1,5 @@
+export const getToFixedPrice = (price: string | number) => Number(price).toFixed(getToFixedNumber(price))
+
 export const getToFixedNumber = (price: number | string) => {
   const absPrice = Math.abs(+price)
   if (absPrice > 1000) {
