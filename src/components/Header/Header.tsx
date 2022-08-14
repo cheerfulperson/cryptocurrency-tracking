@@ -52,7 +52,7 @@ function Header() {
               <AiOutlineLeft />
             </Button>
           )}
-          <List>
+          <List className='header__currency-list'>
             {cryptocurrencies.map((cryptoInfo) => (
               <ListItem key={cryptoInfo.cryptoCode}>
                 <CryptoInfo info={cryptoInfo} />

@@ -41,7 +41,7 @@ function CryptoList({ cryptoDataAssets, ...props }: CryptoListProps) {
             className='crypto-row__item crypto-row__item-price'
             styles={{ color: getPriceColor(cryptoInfo.changePercent24Hr) }}
           >
-            <span>${Number(cryptoInfo.priceUsd).toFixed(getToFixedNumber(cryptoInfo.changePercent24Hr))}</span>
+            <span>${Number(cryptoInfo.priceUsd).toFixed(getToFixedNumber(cryptoInfo.priceUsd))}</span>
           </ListItem>
           <ListItem className='crypto-row__item' styles={{ color: getPriceColor(cryptoInfo.changePercent24Hr) }}>
             <span>{Number(cryptoInfo.changePercent24Hr).toFixed(getToFixedNumber(cryptoInfo.changePercent24Hr))}</span>

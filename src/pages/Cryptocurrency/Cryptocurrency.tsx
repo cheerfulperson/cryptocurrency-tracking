@@ -27,8 +27,13 @@ function Cryptocurrency() {
   }
 
   React.useEffect(() => {
-    window.onresize = () => {
+    function resize() {
       setChartSize(getChartSize())
+    }
+    window.addEventListener('resize', resize)
+
+    return () => {
+      window.removeEventListener('resize', resize)
     }
   }, [chartSize])
 
@@ -51,31 +56,31 @@ function Cryptocurrency() {
     return winWidth
   }
   return (
-      <section className='cryptocurrency'>
-        <CryptocurrencyHeader cryptoInfo={cryptoInfo} />
-        <article className='cryptocurrency__body'>
-          <article className='cryptocurrency__chart-block'>
-            <BarChart
-              className='cryptocurrency__chart'
-              width={chartSize}
-              height={400}
-              data={cryptoHistory}
-              margin={{ top: 5, right: 20, left: 10, bottom: 0 }}
-            >
-              <XAxis dataKey='time' tickMargin={10} padding={{ left: 0, right: 0 }} />
-              <YAxis dataKey='priceUsd' />
-              <Tooltip />
-              <CartesianGrid stroke='#f5f5f5' />
-              <Brush dataKey='priceUsd' height={30} fill='#8884d8' />
-              <Bar dataKey='priceUsd' barSize={50} stroke='#8884d8'>
-                {cryptoHistory.map((entry, index, arr) => (
-                  <Cell key={`cell-${index}`} fill={entry.priceUsd < arr[index - 1]?.priceUsd ? 'red' : '#82ca9d'} />
-                ))}
-              </Bar>
-            </BarChart>
-          </article>
+    <section className='cryptocurrency'>
+      <CryptocurrencyHeader cryptoInfo={cryptoInfo} />
+      <article className='cryptocurrency__body'>
+        <article className='cryptocurrency__chart-block'>
+          <BarChart
+            className='cryptocurrency__chart'
+            width={chartSize}
+            height={400}
+            data={cryptoHistory}
+            margin={{ top: 5, right: 20, left: 10, bottom: 0 }}
+          >
+            <XAxis dataKey='time' tickMargin={10} padding={{ left: 0, right: 0 }} />
+            <YAxis dataKey='priceUsd' />
+            <Tooltip />
+            <CartesianGrid stroke='#f5f5f5' />
+            <Brush dataKey='priceUsd' height={30} fill='#8884d8' />
+            <Bar dataKey='priceUsd' barSize={50} stroke='#8884d8'>
+              {cryptoHistory.map((entry, index, arr) => (
+                <Cell key={`cell-${index}`} fill={entry.priceUsd < arr[index - 1]?.priceUsd ? 'red' : '#82ca9d'} />
+              ))}
+            </Bar>
+          </BarChart>
         </article>
-      </section>
+      </article>
+    </section>
   )
 }
 

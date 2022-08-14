@@ -1,25 +1,33 @@
 $max-width: 1440px;
 
 .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  height: 60px;
+  box-shadow: 2px 0px 3px #00000079;
+
+  &__container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
-    height: 60px;
-    box-shadow: 2px 0px 3px #00000079;
+    width: 100%;
+    max-width: $max-width;
+  }
 
-    &__container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        max-width: $max-width;
-    }
+  &__side {
+    max-width: 800px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
 
-    &__side {
-        max-width: 800px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
+  &__currency-list {
+    @media all and (max-width: 724px) {
+      flex-direction: column;
+      align-items: flex-start;
+      flex-wrap: wrap;
     }
+  }
 }

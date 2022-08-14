@@ -3,6 +3,9 @@ export const getToFixedNumber = (price: number | string) => {
   if (absPrice > 1000) {
     return 2
   }
+  if (absPrice > 100) {
+    return 3
+  }
   if (absPrice > 1) {
     return 4
   }

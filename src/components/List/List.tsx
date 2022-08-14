@@ -5,12 +5,13 @@ interface ListProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
   styles?: React.CSSProperties
+  className?: string
   children?: JSX.Element[] | JSX.Element
 }
 
-function List({ styles, children, ...props }: ListProps) {
+function List({ styles, children, className, ...props }: ListProps) {
   return (
-    <ul className='list' style={styles} {...props}>
+    <ul className={`list ${className || ''}`} style={styles} {...props}>
       {children}
     </ul>
   )
