@@ -16,3 +16,16 @@ export interface CryptoHistory {
   priceUsd: string
   time: number | string
 }
+
+export interface SelecetedCryptoPayload {
+  receivedAt?: number | null
+  isLoading?: boolean | null
+  error?: string | null
+  item?: CryptoAssets | null
+  history?: CryptoHistory[] | null
+}
+
+export interface CryptoPayload {
+  receivedAt: number
+  item: CryptoAssets[]
+}
