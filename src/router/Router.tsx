@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Routes, Route, Location } from 'react-router-dom'
+import Loading from '../components/Loading/Loading'
 import { RoutePathes } from './routes'
 
 const Home = React.lazy(() => import('../pages/home/Home'))
@@ -16,7 +17,7 @@ function AppRouter({ location: appLocation }: IAppRouterProps) {
       <Route
         path={RoutePathes.Home}
         element={
-          <React.Suspense fallback={<>error</>}>
+          <React.Suspense fallback={<Loading />}>
             <Home />
           </React.Suspense>
         }
@@ -24,7 +25,7 @@ function AppRouter({ location: appLocation }: IAppRouterProps) {
       <Route
         path={RoutePathes.Cryptocurrency}
         element={
-          <React.Suspense fallback={<>error</>}>
+          <React.Suspense fallback={<Loading />}>
             <Cryptocurrency />
           </React.Suspense>
         }
@@ -32,7 +33,7 @@ function AppRouter({ location: appLocation }: IAppRouterProps) {
       <Route
         path={RoutePathes.None}
         element={
-          <React.Suspense fallback={<>error</>}>
+          <React.Suspense fallback={<Loading />}>
             <NotFound />
           </React.Suspense>
         }

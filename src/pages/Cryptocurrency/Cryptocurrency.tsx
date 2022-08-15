@@ -7,6 +7,7 @@ import { reqestSelectedCrypto } from '../../redux/actions/selected-crypto.action
 import './Cryptocurrency.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from '../../redux/initialStates'
+import Loading from '../../components/Loading/Loading'
 
 const { useState, useEffect } = React
 
@@ -42,7 +43,7 @@ function Cryptocurrency() {
   }
 
   if (isLoading || isLoading === undefined || !cryptoInfo) {
-    return <>loading</>
+    return <Loading />
   }
 
   return (

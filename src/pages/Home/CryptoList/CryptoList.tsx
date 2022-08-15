@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import List from '../../../components/List/List'
 import ListItem from '../../../components/ListItem/ListItem'
+import Loading from '../../../components/Loading/Loading'
 import { reqestCrypto } from '../../../redux/actions/crypto.actions'
 import { AppState } from '../../../redux/initialStates'
 import { getPriceColor, getToFixedNumber } from '../../../utils/cummon'
@@ -27,9 +28,8 @@ function CryptoList({ page, ...props }: CryptoListProps) {
     history(`/cryptocurrency/${currencyId}`)
   }
 
-  console.log(isLoading);
   if (isLoading || isLoading === undefined || !cryptoDataAssets) {
-    return <>loading</>
+    return <Loading />
   }
 
   return (
