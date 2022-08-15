@@ -55,6 +55,9 @@ function CryptocurrencyHeader({ cryptoInfo }: CryptocurrencyHeaderProps) {
           containerClassName='modal-input'
           onInput={(e) => {
             const target = e.target as HTMLInputElement
+            if (!target.value.match(/^[0-9.]*$/)) {
+              target.value = ''
+            }
             setCryptoAmount(parseFloat(target.value))
           }}
         />

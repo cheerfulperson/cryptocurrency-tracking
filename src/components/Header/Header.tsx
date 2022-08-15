@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router'
 import { CryptoAssets } from '../../models/crypto.models'
 import Button from '../Button/Button'
@@ -16,12 +16,14 @@ import { useQuery } from '@tanstack/react-query'
 import { requestApi } from '../../api/api'
 import { AppState } from '../../redux/initialStates'
 import './Header.scss'
+import { deleteCryptoFromUserData } from '../../redux/actions/user-data.actions'
 
 function Header() {
   const [isUserPanelOpen, setIsUserPanelOpen] = React.useState(false)
   const userData = useSelector((state: AppState) => state.userData)
   const location = useLocation()
   const history = useNavigate()
+  const dispatch = useDispatch()
   const isHomePathName = location.pathname === '' || location.pathname === '/'
 
   const getCrypto = async () => {
@@ -31,6 +33,10 @@ function Header() {
     return res.data.data
   }
   const { isLoading, data: cryptocurrencies } = useQuery<CryptoAssets[]>([null], getCrypto)
+
+  function handleSellClick(cryptoId: string) {
+    dispatch(deleteCryptoFromUserData(cryptoId));
+  }
 
   return (
     <>
@@ -84,7 +90,7 @@ function Header() {
                   {getToFixedPrice(+userCrypto.crypto.priceUsd - userCrypto.purchasePrice)}
                 </p>
               </div>
-              <Button type='custom'>Sell all</Button>
+              <Button type='custom' onClick={() => handleSellClick(userCrypto.crypto.id)}>Sell all</Button>
             </article>
           ))}
         </article>
