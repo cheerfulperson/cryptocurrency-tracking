@@ -8,8 +8,9 @@ import {
 
 export const fetchSelectedCrypto = (storeAPI) => (next) => (action: SelectedCryptoActions) => {
   if (action.type === ESelectedCryptoAtions.RequestCrypto) {
-    try {
-      requestApi.get(`assets/${action.cryptoId || ''}`).then((assets) => {
+    requestApi
+      .get(`assets/${action.cryptoId || ''}`)
+      .then((assets) => {
         requestApi
           .get(`assets/${action.cryptoId}/history`, {
             params: {
@@ -19,12 +20,17 @@ export const fetchSelectedCrypto = (storeAPI) => (next) => (action: SelectedCryp
           .then((history) => {
             storeAPI.dispatch(receiveSelectedCrypto(assets.data.data, history.data.data))
           })
+          .catch((error) => {
+            if (error instanceof Error) {
+              storeAPI.dispatch(invalidLoadSelectedCrypto(error?.message))
+            }
+          })
       })
-    } catch (error) {
-      if (error instanceof Error) {
-        storeAPI.dispatch(invalidLoadSelectedCrypto(error?.message))
-      }
-    }
+      .catch((error) => {
+        if (error instanceof Error) {
+          storeAPI.dispatch(invalidLoadSelectedCrypto(error?.message))
+        }
+      })
   }
   return next(action)
 }

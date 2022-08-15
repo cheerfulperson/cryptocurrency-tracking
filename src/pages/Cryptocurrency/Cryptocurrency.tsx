@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useParams } from 'react-router'
+import { Navigate, useNavigate, useParams } from 'react-router'
 import CryptocurrencyHeader from './CryptocurrencyHeader/CryptocurrencyHeader'
 import { Bar, BarChart, Brush, CartesianGrid, Cell, Tooltip, XAxis, YAxis } from 'recharts'
 import { reqestSelectedCrypto } from '../../redux/actions/selected-crypto.actions'
@@ -43,6 +43,10 @@ function Cryptocurrency() {
 
   if (isLoading || isLoading === undefined) {
     return <>loading</>
+  }
+
+  if (cryptoInfo === null) {
+    return (<Navigate to="/" />)
   }
 
   return (
