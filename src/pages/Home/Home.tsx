@@ -4,19 +4,12 @@ import './Home.scss'
 import Button from '../../components/Button/Button'
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
 import { AppState } from '../../redux/initialStates'
-import { useDispatch, useSelector } from 'react-redux'
-import { reqestCrypto } from '../../redux/actions/crypto.actions'
+import { useSelector } from 'react-redux'
 
 function Home() {
   const [page, setPage] = React.useState<number>(0)
   const pages = useSelector((state: AppState) => state.homeCrypto.pages)
-  const isLoading = useSelector((state: AppState) => state.homeCrypto.isLoading)
-  const dataAssets = useSelector((state: AppState) => state.homeCrypto.items)
-  const dispatch = useDispatch()
-
-  React.useEffect(() => {
-    dispatch(reqestCrypto(page, 0))
-  }, [dispatch])
+  const oldPage = useSelector((state: AppState) => state.homeCrypto.offset)
 
   function handleClick(increment: number) {
     let newPage = page + increment;
@@ -27,12 +20,12 @@ function Home() {
         newPage = 0
     }
     setPage(newPage)
-    dispatch(reqestCrypto(newPage, pages))
   }
 
-  if (isLoading || isLoading === undefined || !dataAssets) {
-    return <>loading</>
-  }
+  React.useEffect(() => {
+    setPage(oldPage);
+  }, []);
+
   return (
     <section className='home'>
       <h1 className='home__title'>Buy crypto at true cost</h1>
@@ -51,7 +44,7 @@ function Home() {
         </Button>
       </article>
       <article className='home__currency-table'>
-        <CryptoList cryptoDataAssets={dataAssets} />
+        <CryptoList page={page} />
       </article>
     </section>
   )

@@ -2,6 +2,7 @@ import { CryptoAssets, CryptoHistory } from '../models/crypto.models'
 
 export interface CryptoState {
   items?: CryptoAssets[] | null
+  currentItems?: CryptoAssets[] | null
   receivedAt?: number
   isLoading: boolean
   error?: string
@@ -32,10 +33,11 @@ export const initialState: AppState = {
   },
   homeCrypto: {
     items: [],
+    currentItems: [],
     isLoading: false,
     receivedAt: null,
     error: null,
-    offset: null,
-    pages: 0
+    offset: 0,
+    pages: 0,
   },
 }

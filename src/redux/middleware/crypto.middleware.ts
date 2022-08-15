@@ -9,21 +9,22 @@ import {
 export const fetchCrypto = (storeAPI) => (next) => (action: CryptoActions) => {
   if (action.type === ECryptoAtions.RequestAllCrypto) {
     try {
-      if (!action.pages || action.pages === 0) {
+      const { pages } = storeAPI.getState().homeCrypto
+      if (pages === 0) {
         requestApi.get('assets').then((assets) => {
-          const pages = Math.floor(assets.data.data.length / 10) - 1
-          storeAPI.dispatch(receiveCrypto(assets.data.data.slice(0, 10), pages))
+          const pagesAmount = Math.floor(assets.data.data.length / 10) - 1
+          storeAPI.dispatch(receiveCrypto(assets.data.data.slice(0, 10), pagesAmount))
         })
       } else {
         requestApi
           .get('assets', {
             params: {
-              offset: action.offset,
+              offset: action.offset * 10,
               limit: 10,
             },
           })
           .then((assets) => {
-            storeAPI.dispatch(receiveCrypto(assets.data.data, action.pages))
+            storeAPI.dispatch(receiveCrypto(assets.data.data, pages))
           })
       }
     } catch (error) {

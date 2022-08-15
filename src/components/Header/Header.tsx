@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { HeaderCryptoInfo } from '../../models/crypto.models'
+import { CryptoAssets } from '../../models/crypto.models'
 import Button from '../Button/Button'
 import List from '../List/List'
 import ListItem from '../ListItem/ListItem'
@@ -13,6 +13,8 @@ import Modal from '../Modal/Modal'
 import { userProfileCrypto } from './mockdata'
 import { getToFixedPrice } from '../../utils/cummon'
 import userImg from '../../assets/avatar.png'
+import { useQuery } from '@tanstack/react-query'
+import { requestApi } from '../../api/api'
 import './Header.scss'
 
 function Header() {
@@ -20,26 +22,15 @@ function Header() {
   const location = useLocation()
   const history = useNavigate()
   const isHomePathName = location.pathname === '' || location.pathname === '/'
-  const cryptocurrencies: HeaderCryptoInfo[] = [
-    {
-      cryptoCode: 'BTC',
-      currencySympol: '$',
-      price: 24698.46,
-      profit: +2.79,
-    },
-    {
-      cryptoCode: 'ETH',
-      currencySympol: '$',
-      price: 2698.46,
-      profit: +2.21,
-    },
-    {
-      cryptoCode: 'ADA',
-      currencySympol: '$',
-      price: 0.571244,
-      profit: -1.19,
-    },
-  ]
+
+  const getCrypto = async () => {
+    const res = await requestApi.get('assets', {params: {
+      ids: ['bitcoin', 'ethereum', 'monero'].join(',')
+    }})
+    return res.data.data
+  }
+  const { isLoading, data: cryptocurrencies } = useQuery<CryptoAssets[]>([null], getCrypto)
+
   const userData: UserData = {
     currencyCode: 'USD',
     value: 134.23,
@@ -57,8 +48,8 @@ function Header() {
               </Button>
             )}
             <List className='header__currency-list'>
-              {cryptocurrencies.map((cryptoInfo) => (
-                <ListItem key={cryptoInfo.cryptoCode}>
+              {!isLoading && cryptocurrencies?.map((cryptoInfo) => (
+                <ListItem key={cryptoInfo.id}>
                   <CryptoInfo info={cryptoInfo} />
                 </ListItem>
               ))}

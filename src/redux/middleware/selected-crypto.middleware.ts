@@ -32,6 +32,6 @@ export const fetchSelectedCrypto = (storeAPI) => (next) => (action: SelectedCryp
         }
       })
   }
-  
+
   return next(action)
 }

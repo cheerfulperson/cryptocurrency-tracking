@@ -3,7 +3,7 @@ import { crypto } from './crypto.reducer';
 import { selectedCrypto } from './selected-crypto.reduser'
 
 const appReducer = combineReducers({
-    selectedCrypto: selectedCrypto,
+    selectedCrypto,
     homeCrypto: crypto
 })
 

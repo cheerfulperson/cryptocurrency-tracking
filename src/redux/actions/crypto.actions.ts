@@ -7,11 +7,10 @@ export enum ECryptoAtions {
   ReceiveAllCrypto = 'RECEIVE_REQUEST_CRYPTOCURRENCY',
 }
 
-export function reqestCrypto(offset: number, pages: number) {
+export function reqestCrypto(offset: number) {
   return {
     type: ECryptoAtions.RequestAllCrypto,
     offset,
-    pages: pages,
   }
 }
 

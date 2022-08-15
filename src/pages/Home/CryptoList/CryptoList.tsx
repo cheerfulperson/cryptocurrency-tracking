@@ -1,22 +1,35 @@
 import * as React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import List from '../../../components/List/List'
 import ListItem from '../../../components/ListItem/ListItem'
-import { CryptoAssets } from '../../../models/crypto.models'
+import { reqestCrypto } from '../../../redux/actions/crypto.actions'
+import { AppState } from '../../../redux/initialStates'
 import { getPriceColor, getToFixedNumber } from '../../../utils/cummon'
 import './CryptoList.scss'
 
 interface CryptoListProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
-  cryptoDataAssets: CryptoAssets[]
+  page: number
 }
 
-function CryptoList({ cryptoDataAssets, ...props }: CryptoListProps) {
+function CryptoList({ page, ...props }: CryptoListProps) {
   const history = useNavigate()
+  const isLoading = useSelector((state: AppState) => state.homeCrypto.isLoading)
+  const cryptoDataAssets = useSelector((state: AppState) => state.homeCrypto.items)
+  const dispatch = useDispatch()
 
+  React.useEffect(() => {
+    dispatch(reqestCrypto(page))
+  }, [page])
   function goToPage(currencyId: string) {
     history(`/cryptocurrency/${currencyId}`)
+  }
+
+  console.log(isLoading);
+  if (isLoading || isLoading === undefined || !cryptoDataAssets) {
+    return <>loading</>
   }
 
   return (

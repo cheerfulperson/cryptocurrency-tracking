@@ -22,7 +22,6 @@ export interface CryptoPayload {
   item: CryptoAssets[]
 }
 
-
 export interface HeaderCryptoInfo {
   cryptoCode: string
   currencySympol: string
@@ -33,3 +32,4 @@ export interface HeaderCryptoInfo {
 export interface CryptoInfo extends HeaderCryptoInfo {
   name: string
 }
+

@@ -1,8 +1,8 @@
 import { ESelectedCryptoAtions, SelectedCryptoACtions } from '../actions/selected-crypto.actions'
-import { AppState, initialState } from '../initialStates'
+import { initialState, SelectedCryptoState } from '../initialStates'
 
 export function selectedCrypto(
-  state: AppState = initialState,
+  state: SelectedCryptoState = initialState.selectedCrypto,
   action: SelectedCryptoACtions,
 ): SelectedCryptoACtions {
   switch (action.type) {
@@ -27,6 +27,6 @@ export function selectedCrypto(
         history: action.history,
       }
     default:
-      return { ...state.selectedCrypto }
+      return { ...state }
   }
 }

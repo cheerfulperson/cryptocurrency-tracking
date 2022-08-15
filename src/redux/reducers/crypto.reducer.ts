@@ -1,7 +1,10 @@
 import { CryptoActions, ECryptoAtions } from '../actions/crypto.actions'
-import { AppState, initialState } from '../initialStates'
+import { CryptoState, initialState } from '../initialStates'
 
-export function crypto(state: AppState = initialState, action: CryptoActions): CryptoActions {
+export function crypto(
+  state: CryptoState = initialState.homeCrypto,
+  action: CryptoActions,
+): CryptoActions {
   switch (action.type) {
     case ECryptoAtions.RequestAllCrypto:
       return {
@@ -25,6 +28,6 @@ export function crypto(state: AppState = initialState, action: CryptoActions): C
         pages: action.pages,
       }
     default:
-      return { ...state.homeCrypto }
+      return { ...state }
   }
 }
