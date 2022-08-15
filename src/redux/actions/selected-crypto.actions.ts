@@ -1,10 +1,11 @@
-import { CryptoAssets, CryptoHistory, SelecetedCryptoPayload } from '../../models/crypto.models'
+import { CryptoAssets, CryptoHistory } from '../../models/crypto.models'
 import { getToFixedNumber } from '../../utils/cummon'
+import { SelectedCryptoState } from '../initialStates'
 
 export enum ESelectedCryptoAtions {
-  RequestCrypto = 'REQUEST_REQUESTED_CRYPTO',
-  InvalidLoadCrypto = 'INVALID_REQUEST_CRYPTO',
-  ReceiveCrypto = 'RECEIVE_REQUEST_CRYPTO',
+  RequestCrypto = 'REQUEST_REQUESTED_SELECTED_CRYPTO',
+  InvalidLoadCrypto = 'INVALID_REQUEST_SELECTED_CRYPTO',
+  ReceiveCrypto = 'RECEIVE_REQUEST_SELECTED_CRYPTO',
 }
 
 export function reqestSelectedCrypto(cryptoId: string) {
@@ -37,8 +38,8 @@ export function receiveSelectedCrypto(payload: CryptoAssets | null, history: Cry
   }
 }
 
-export interface SelectedCryptoActions extends SelecetedCryptoPayload {
-  type: string
+export interface SelectedCryptoACtions extends SelectedCryptoState {
+  type?: string
   payload?: CryptoAssets | null
   cryptoId?: string | null
 }

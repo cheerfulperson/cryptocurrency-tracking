@@ -3,10 +3,10 @@ import {
   ESelectedCryptoAtions,
   invalidLoadSelectedCrypto,
   receiveSelectedCrypto,
-  SelectedCryptoActions,
+  SelectedCryptoACtions,
 } from '../actions/selected-crypto.actions'
 
-export const fetchSelectedCrypto = (storeAPI) => (next) => (action: SelectedCryptoActions) => {
+export const fetchSelectedCrypto = (storeAPI) => (next) => (action: SelectedCryptoACtions) => {
   if (action.type === ESelectedCryptoAtions.RequestCrypto) {
     requestApi
       .get(`assets/${action.cryptoId || ''}`)
@@ -32,5 +32,6 @@ export const fetchSelectedCrypto = (storeAPI) => (next) => (action: SelectedCryp
         }
       })
   }
+  
   return next(action)
 }

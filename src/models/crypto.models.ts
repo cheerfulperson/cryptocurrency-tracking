@@ -17,15 +17,19 @@ export interface CryptoHistory {
   time: number | string
 }
 
-export interface SelecetedCryptoPayload {
-  receivedAt?: number | null
-  isLoading?: boolean | null
-  error?: string | null
-  item?: CryptoAssets | null
-  history?: CryptoHistory[] | null
-}
-
 export interface CryptoPayload {
   receivedAt: number
   item: CryptoAssets[]
+}
+
+
+export interface HeaderCryptoInfo {
+  cryptoCode: string
+  currencySympol: string
+  price: number
+  profit: number
+}
+
+export interface CryptoInfo extends HeaderCryptoInfo {
+  name: string
 }

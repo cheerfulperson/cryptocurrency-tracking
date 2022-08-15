@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { HeaderCryptoInfo } from '../../../models/crypto-info.model'
+import { HeaderCryptoInfo } from '../../../models/crypto.models'
 import './CryptoInfo.scss'
 
 interface CryptoInfoProps {
