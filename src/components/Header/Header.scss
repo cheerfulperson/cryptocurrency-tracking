@@ -31,6 +31,14 @@ $max-width: 1440px;
       flex-wrap: wrap;
     }
   }
+
+  &__button {
+    @media all and (max-width: 360px) {
+      padding: 4px;
+      min-width: 25px;
+      height: 25px;
+    }
+  }
 }
 
 .user-panel {

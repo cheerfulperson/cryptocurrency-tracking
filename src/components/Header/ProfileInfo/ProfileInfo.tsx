@@ -8,7 +8,6 @@ interface ProfileInfoProps {
 }
 
 function ProfileInfo({ info }: ProfileInfoProps) {
-  console.log(info.value, info.oldValue)
   const profit = Math.round((info.value - info.oldValue) * 100) / 100
   const percentageProfit = getToFixedPrice((profit / info.value) * 100)
   const profitSign = profit > 0 ? '+' : ''

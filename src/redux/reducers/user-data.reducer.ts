@@ -48,8 +48,8 @@ export function userData(
     case EUserDataAtions.DeleteCryptoToUserData:
       return {
         ...state,
-        value: state.value - cryptoItem.purchasePrice * cryptoItem.amount,
-        oldValue: state.oldValue - cryptoItem.purchasePrice * cryptoItem.amount,
+        value: (state.value || 0) - cryptoItem.purchasePrice * cryptoItem.amount,
+        oldValue: (state.oldValue || 0) - cryptoItem.purchasePrice * cryptoItem.amount,
         cryptoData: userCryptoItems.filter((value) => value.crypto.id !== action.cryptoId),
       }
     default:

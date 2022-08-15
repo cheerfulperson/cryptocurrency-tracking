@@ -44,7 +44,7 @@ function Header() {
         <article className='header__container'>
           <article className='header__side'>
             {!isHomePathName && (
-              <Button type='custom' onClick={() => history('')}>
+              <Button type='custom' className='header__button' onClick={() => history('')}>
                 <AiOutlineLeft />
               </Button>
             )}

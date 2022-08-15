@@ -23,6 +23,7 @@ function CryptoList({ page, ...props }: CryptoListProps) {
 
   React.useEffect(() => {
     dispatch(reqestCrypto(page))
+
   }, [page])
   function goToPage(currencyId: string) {
     history(`/cryptocurrency/${currencyId}`)
@@ -54,13 +55,24 @@ function CryptoList({ page, ...props }: CryptoListProps) {
             className='crypto-row__item crypto-row__item-price'
             styles={{ color: getPriceColor(cryptoInfo.changePercent24Hr) }}
           >
-            <span>${Number(cryptoInfo.priceUsd).toFixed(getToFixedNumber(cryptoInfo.priceUsd))}</span>
+            <span>
+              ${Number(cryptoInfo.priceUsd).toFixed(getToFixedNumber(cryptoInfo.priceUsd))}
+            </span>
           </ListItem>
-          <ListItem className='crypto-row__item' styles={{ color: getPriceColor(cryptoInfo.changePercent24Hr) }}>
-            <span>{Number(cryptoInfo.changePercent24Hr).toFixed(getToFixedNumber(cryptoInfo.changePercent24Hr))}</span>
+          <ListItem
+            className='crypto-row__item'
+            styles={{ color: getPriceColor(cryptoInfo.changePercent24Hr) }}
+          >
+            <span>
+              {Number(cryptoInfo.changePercent24Hr).toFixed(
+                getToFixedNumber(cryptoInfo.changePercent24Hr),
+              )}
+            </span>
           </ListItem>
           <ListItem className='crypto-row__item crypto-row__item-market'>
-            <span>${Number(cryptoInfo.marketCapUsd).toFixed(getToFixedNumber(cryptoInfo.marketCapUsd))}</span>
+            <span>
+              ${Number(cryptoInfo.marketCapUsd).toFixed(getToFixedNumber(cryptoInfo.marketCapUsd))}
+            </span>
           </ListItem>
         </List>
       ))}
