@@ -9,6 +9,5 @@ export interface UsersCrypto {
 export interface UserData {
   value: number
   oldValue: number
-  currencyCode: string
   cryptoData?: UsersCrypto[]
 }

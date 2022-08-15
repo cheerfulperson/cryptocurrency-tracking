@@ -1,24 +1,25 @@
 import * as React from 'react'
+import { useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router'
 import { CryptoAssets } from '../../models/crypto.models'
 import Button from '../Button/Button'
 import List from '../List/List'
 import ListItem from '../ListItem/ListItem'
 import CryptoInfo from './CryptoInfo/CryptoInfo'
 import { AiOutlineLeft } from 'react-icons/ai'
-import { useLocation, useNavigate } from 'react-router'
-import { UserData } from '../../models/user.model'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import Avatar from '../Avatar/Avatar'
 import Modal from '../Modal/Modal'
-import { userProfileCrypto } from './mockdata'
 import { getToFixedPrice } from '../../utils/cummon'
 import userImg from '../../assets/avatar.png'
 import { useQuery } from '@tanstack/react-query'
 import { requestApi } from '../../api/api'
+import { AppState } from '../../redux/initialStates'
 import './Header.scss'
 
 function Header() {
   const [isUserPanelOpen, setIsUserPanelOpen] = React.useState(false)
+  const userData = useSelector((state: AppState) => state.userData)
   const location = useLocation()
   const history = useNavigate()
   const isHomePathName = location.pathname === '' || location.pathname === '/'
@@ -31,12 +32,6 @@ function Header() {
   }
   const { isLoading, data: cryptocurrencies } = useQuery<CryptoAssets[]>([null], getCrypto)
 
-  const userData: UserData = {
-    currencyCode: 'USD',
-    value: 134.23,
-    oldValue: 122.93,
-    cryptoData: userProfileCrypto,
-  }
   return (
     <>
       <header className='header'>

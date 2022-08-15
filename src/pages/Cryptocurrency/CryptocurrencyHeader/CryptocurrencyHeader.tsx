@@ -1,9 +1,13 @@
 import * as React from 'react'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../../components/Button/Button'
 import Input from '../../../components/Input/Input'
 import Modal from '../../../components/Modal/Modal'
+import { useLocalStorage } from '../../../hooks/useLocalStorage'
 import { CryptoAssets } from '../../../models/crypto.models'
+import { addCryptoToUserData } from '../../../redux/actions/user-data.actions'
+import { AppState } from '../../../redux/initialStates'
 import { getToFixedNumber } from '../../../utils/cummon'
 import './CryptocurrencyHeader.scss'
 
@@ -12,12 +16,29 @@ interface CryptocurrencyHeaderProps {
 }
 
 function CryptocurrencyHeader({ cryptoInfo }: CryptocurrencyHeaderProps) {
-  const { name, symbol, priceUsd, changePercent24Hr, vwap24Hr, volumeUsd24Hr } = cryptoInfo
+  const [cryptoAmount, setCryptoAmount] = React.useState(0)
   const [isOpenModal, setIsopenModal] = React.useState(false)
+  const userDataInfo = useSelector((state: AppState) => state.userData)
+  const [, setUserData] = useLocalStorage('userData', userDataInfo)
+  const { name, symbol, priceUsd, changePercent24Hr, vwap24Hr, volumeUsd24Hr } = cryptoInfo
+  const dispatch = useDispatch()
 
-  function  handleBuyCryptoClick() {
-    setIsopenModal(false);
+  function handleBuyCryptoClick() {
+    dispatch(
+      addCryptoToUserData({
+        amount: cryptoAmount,
+        purchasePrice: Number(cryptoInfo.priceUsd),
+        crypto: cryptoInfo,
+      }),
+    )
+    setIsopenModal(false)
   }
+
+  React.useEffect(() => {
+    if (userDataInfo) {
+      setUserData(userDataInfo)
+    }
+  }, [userDataInfo])
 
   return (
     <>
@@ -32,12 +53,10 @@ function CryptocurrencyHeader({ cryptoInfo }: CryptocurrencyHeaderProps) {
             getToFixedNumber(cryptoInfo.priceUsd),
           )}`}
           containerClassName='modal-input'
-        />
-        <Input
-          label={`Sell ${cryptoInfo.name}: $${Number(+cryptoInfo.priceUsd - 10).toFixed(
-            getToFixedNumber(cryptoInfo.vwap24Hr),
-          )}`}
-          containerClassName='modal-input'
+          onInput={(e) => {
+            const target = e.target as HTMLInputElement
+            setCryptoAmount(parseFloat(target.value))
+          }}
         />
         <Button type='free' onClick={() => handleBuyCryptoClick()}>
           <span>submit</span>

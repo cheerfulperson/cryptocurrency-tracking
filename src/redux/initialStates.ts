@@ -1,4 +1,5 @@
 import { CryptoAssets, CryptoHistory } from '../models/crypto.models'
+import { UserData } from '../models/user.model'
 
 export interface CryptoState {
   items?: CryptoAssets[] | null
@@ -18,9 +19,12 @@ export interface SelectedCryptoState {
   history?: CryptoHistory[] | null
 }
 
+export type UserDataState = Partial<UserData>
+
 export interface AppState {
   selectedCrypto: null | SelectedCryptoState
   homeCrypto: null | CryptoState
+  userData: null | UserDataState
 }
 
 export const initialState: AppState = {
@@ -40,4 +44,9 @@ export const initialState: AppState = {
     offset: 0,
     pages: 0,
   },
+  userData: {
+    value: 0,
+    oldValue: 0,
+    cryptoData: []
+  }
 }

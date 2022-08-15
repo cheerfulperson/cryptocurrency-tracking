@@ -14,7 +14,10 @@ export const getToFixedNumber = (price: number | string) => {
   if (absPrice > 0.01) {
     return 6
   }
-  return 8
+  if (absPrice > 0.000001) {
+    return 8
+  }
+  return 0
 }
 export const getPriceColor = (price: number | string) => {
   return +price > 0 ? '#19e219' : '#ff0000'

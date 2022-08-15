@@ -1,22 +1,23 @@
 import * as React from 'react'
 import { UserData } from '../../../models/user.model'
+import { getToFixedPrice } from '../../../utils/cummon'
 import './ProfileInfo.scss'
 
 interface ProfileInfoProps {
-  info: UserData
+  info: Partial<UserData>
 }
 
 function ProfileInfo({ info }: ProfileInfoProps) {
-  const profit = Math.round((info.value - info.oldValue) * 100) / 100;
-  const percentageProfit = (profit / info.value * 100).toFixed(2);
+  const profit = Math.round((info.value - info.oldValue) * 100) / 100
+  const percentageProfit = getToFixedPrice((profit / info.value) * 100)
   const profitSign = profit > 0 ? '+' : ''
   const profitColor = profit > 0 ? '#19e219' : '#ff0000'
   return (
     <p className='profile-info'>
-      <span className='profile-info__value'>{info.value}</span>
-      <span className='profile-info__currency'>{`${info.currencyCode}`}</span>
+      <span className='profile-info__value'>{getToFixedPrice(info.value)}</span>
+      <span className='profile-info__currency'>USD</span>
       <span className='profile-info__profit' style={{ color: profitColor }}>
-        {` ${profitSign}${profit} (${percentageProfit}%)`}
+        {` ${profitSign}${profit} (${isNaN(+percentageProfit) ? 0 : percentageProfit}%)`}
       </span>
     </p>
   )
