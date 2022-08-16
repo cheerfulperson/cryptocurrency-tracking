@@ -35,33 +35,35 @@ function Home() {
   }, [])
 
   return (
-    <section className='home'>
-      <h1 className='home__title'>
-        {'Buy crypto at true cost'.split('').map((l, i) => (
-          <span key={i} className={l !== ' ' ? 'letter' : ''}>
-            {l}
-          </span>
-        ))}
-      </h1>
-      <p className='home__subtitle'>
-        Buy and sell 250+ cryptocurrencies with 20+ fiat currencies using bank transfers or your
-        credit/debit card.
-      </p>
-      <article className='home__pagination'>
-        <Button type='custom' onClick={() => handleClick(-1)}>
-          <AiOutlineLeft />
-        </Button>
-        <p className='home__pages'>
-          {page + 1} / {pages + 1}
+    <>
+      <section className='home'>
+        <h1 className='home__title'>
+          {'Buy crypto at true cost'.split('').map((l, i) => (
+            <span key={i} className={l !== ' ' ? 'letter' : ''}>
+              {l}
+            </span>
+          ))}
+        </h1>
+        <p className='home__subtitle'>
+          Buy and sell 250+ cryptocurrencies with 20+ fiat currencies using bank transfers or your
+          credit/debit card.
         </p>
-        <Button type='custom' onClick={() => handleClick(1)}>
-          <AiOutlineRight />
-        </Button>
-      </article>
-      <article className='home__currency-table'>
-        <CryptoList page={page} />
-      </article>
-    </section>
+        <article className='home__pagination'>
+          <Button type='custom' onClick={() => handleClick(-1)}>
+            <AiOutlineLeft />
+          </Button>
+          <p className='home__pages'>
+            {page + 1} / {pages + 1}
+          </p>
+          <Button type='custom' onClick={() => handleClick(1)}>
+            <AiOutlineRight />
+          </Button>
+        </article>
+        <article className='home__currency-table'>
+          <CryptoList page={page} />
+        </article>
+      </section>
+    </>
   )
 }
 

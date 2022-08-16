@@ -38,13 +38,15 @@ function BuyModal({ cryptoInfo, isOpenByModal, onSubmit, onClose }: BuyModalProp
   }, [userDataInfo])
 
   function handleBuyCryptoClick() {
-    dispatch(
-      addCryptoToUserData({
-        amount: cryptoAmount,
-        purchasePrice: Number(cryptoInfo.priceUsd),
-        crypto: cryptoInfo,
-      }),
-    )
+    if (cryptoAmount !== 0) {
+        dispatch(
+          addCryptoToUserData({
+            amount: cryptoAmount,
+            purchasePrice: Number(cryptoInfo.priceUsd),
+            crypto: cryptoInfo,
+          }),
+        )
+    }
     if (onSubmit) {
       onSubmit({
         cryptoExpenses: cryptoAmount,
@@ -61,10 +63,11 @@ function BuyModal({ cryptoInfo, isOpenByModal, onSubmit, onClose }: BuyModalProp
     }
     if (value > max || value < min) {
         target.style.color = 'red'
+        setCryptoAmount(0)
         return
     }
     target.style.color = ''
-    setCryptoAmount(parseFloat(target.value))
+    setCryptoAmount(value)
   }
 
   return (

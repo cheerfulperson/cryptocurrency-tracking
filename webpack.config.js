@@ -43,7 +43,7 @@ const baseConfig = {
     extensions: ['.ts', '.tsx', '.js', '.json'],
   },
   output: {
-    filename: 'main.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/'
   },

@@ -1,3 +1,8 @@
 module.exports = {
-    mode: 'production',
-};
+  mode: 'production',
+  optimization: { splitChunks: { chunks: 'all' } },
+  performance: {
+    hints: false,
+    maxAssetSize: 512000
+}
+}
