@@ -1,0 +1,49 @@
+.profile-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: 0.9em;
+  @media all and (max-width: 900px) {
+    font-size: 0.6em;
+  }
+  @media all and (max-width: 724px) {
+    flex-wrap: wrap;
+  }
+  span {
+    display: inline-block;
+    margin: 0 0 0 4px;
+  }
+
+  &__value {
+    position: relative;
+    font-weight: 600;
+    cursor: pointer;
+  
+    &::after {
+      content: attr(data-value);
+      opacity: 0;
+      z-index: 0;
+      position: absolute;
+      left: 0;
+      padding: 5px;
+      color: white;
+      background-color: #adadad71;
+      transition: 0.3s;
+    }
+
+    &:hover::after{
+      opacity: 1;
+      z-index: 1;
+      transform: translate(0, 65%);
+    }
+  }
+
+  &__currency {
+    color: #3a3a3a;
+  }
+
+  &__profit {
+    font-size: 0.7em;
+  }
+}

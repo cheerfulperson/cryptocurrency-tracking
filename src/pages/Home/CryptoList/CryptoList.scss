@@ -1,0 +1,116 @@
+.crypto-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  width: 100%;
+  max-width: 1000px;
+  margin: 5px 0;
+  min-height: 40px;
+  border-bottom: 1px solid #d2d2d270;
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    transform: translateY(-5px);
+    background: #cdcdcd;
+    box-shadow: 0px 2px 2px rgb(119, 119, 119);
+  }
+
+  &:active {
+    transform: translateY(0px);
+    background: #cdcdcd;
+    box-shadow: 0px 0px 0px rgb(119, 119, 119);
+  }
+
+  &__button {
+    @media all and (max-width: 600px) {
+      max-width: 25px;
+      height: 25px;
+      font-size: 10px;
+      padding: 2px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-left: 5px;
+    width: 20%;
+    @media all and (max-width: 730px) {
+        font-size: 0.8em;
+      }
+    @media all and (max-width: 600px) {
+      font-size: 0.6em;
+    }
+
+    &-name {
+      justify-content: flex-start;
+      padding: 0 5px;
+      font-weight: 600;
+      font-size: 1.2em;
+      text-transform: uppercase;
+      line-break: auto;
+      @media all and (max-width: 730px) {
+        font-size: 1em;
+      }
+      @media all and (max-width: 600px) {
+        width: 30%;
+        font-size: 0.8em;
+      }
+    }
+
+    &-symbol {
+      display: inline-block;
+      margin-left: 5px;
+      font-weight: 700;
+      color: #7d7d7db6;
+      font-size: 14px;
+      @media all and (max-width: 600px) {
+        display: none;
+      }
+    }
+
+    &-price {
+      font-size: 1.2em;
+      @media all and (max-width: 730px) {
+        font-size: 1em;
+        width: fit-content;
+      }
+      @media all and (max-width: 600px) {
+        font-size: 0.8em;
+      }
+      @media all and (max-width: 320px) {
+        margin-left: 10px;
+        font-size: 0.7em;
+        word-break: break-all;
+      }
+    }
+
+    &-change {
+      @media all and (max-width: 600px) {
+        word-break: break-all;
+      }
+    }
+  
+    &-market {
+      color: #727272;
+      font-size: 12px;
+      word-break: break-all;
+      @media all and (max-width: 420px) {
+        display: none;
+      }
+    }
+
+    &-button {
+      justify-content: flex-end;
+      @media all and (max-width: 600px) {
+        justify-content: center;
+        min-width: 45px;
+        width: 45px;
+      }
+    }
+  }
+}

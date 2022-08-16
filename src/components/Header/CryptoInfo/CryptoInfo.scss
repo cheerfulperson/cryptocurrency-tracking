@@ -1,0 +1,36 @@
+.crypto-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1em;
+
+  @media all and (max-width: 900px) {
+    font-size: 0.6em;
+  }
+
+  @media all and (max-width: 724px) {
+    margin: 2px 0;
+  }
+
+  span {
+    display: inline-block;
+    margin: 0 0 0 8px;
+    @media all and (max-width: 724px) {
+      margin: 0 0 0 4px;
+    }
+  }
+
+  &__code {
+    font-weight: 600;
+    text-shadow: 1.5px 1.5px 2px #0084ff;
+  }
+
+  &__price {
+    color: #3a3a3a;
+  }
+
+  &__profit {
+    font-size: 0.7em;
+  }
+}

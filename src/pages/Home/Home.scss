@@ -1,0 +1,55 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  &__title {
+    text-align: center;
+    font-size: 3em;
+    margin: 30px 20px 10px 20px;
+    text-shadow: 1px 1px 4px #7d7d7d;
+    text-transform: uppercase;
+
+    @media all and (max-width: 724px) {
+      font-size: 2em;
+    }
+    @media all and (max-width: 400px) {
+      font-size: 1.5em;
+    }
+  }
+
+  &__subtitle {
+    margin: 10px;
+    max-width: 360px;
+    text-align: center;
+  }
+
+  &__currency-table {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 10px 30px 10px;
+    padding: 20px;
+    @media all and (max-width: 730px) {
+      padding: 10px;
+    }
+    @media all and (max-width: 420px) {
+      padding: 5px;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+  }
+
+  &__pages {
+    margin: 0 10px;
+  }
+}
+
+.letter {
+    display: inline-block;
+}
