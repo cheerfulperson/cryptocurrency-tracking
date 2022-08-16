@@ -4,7 +4,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { CryptoAssets } from '../../models/crypto.models'
 import { addCryptoToUserData } from '../../redux/actions/user-data.actions'
 import { AppState } from '../../redux/initialStates'
-import { getMaxAmount, getToFixedPrice } from '../../utils/cummon'
+import { getToFixedPrice } from '../../utils/cummon'
 import Button from '../Button/Button'
 import Input from '../Input/Input'
 import Modal from '../Modal/Modal'
@@ -23,7 +23,6 @@ function BuyModal({ cryptoInfo, isOpenByModal, onSubmit, onClose }: BuyModalProp
   const userDataInfo = useSelector((state: AppState) => state.userData)
   const [, setUserData] = useLocalStorage('userData', userDataInfo)
   const min = +cryptoInfo.priceUsd / 100000
-  const max = getMaxAmount(cryptoInfo.priceUsd)
 
   const dispatch = useDispatch()
 
@@ -61,7 +60,7 @@ function BuyModal({ cryptoInfo, isOpenByModal, onSubmit, onClose }: BuyModalProp
     if (!target.value.match(/^[0-9.,]*$/)) {
       target.value = ''
     }
-    if (value > max || value < min) {
+    if (value < min) {
         target.style.color = 'red'
         setCryptoAmount(0)
         return
@@ -82,9 +81,6 @@ function BuyModal({ cryptoInfo, isOpenByModal, onSubmit, onClose }: BuyModalProp
         <span>You can buy:</span>
         <span>
           min: {getToFixedPrice(min)} {cryptoInfo.symbol}
-        </span>
-        <span>
-          max: {max} {cryptoInfo.symbol}
         </span>
       </p>
       <Input

@@ -23,6 +23,7 @@ export function userData(
     }
     return value
   })
+  let filtereditems: UsersCrypto[]
 
   switch (action.type) {
     case EUserDataAtions.LoadUserData:
@@ -46,11 +47,18 @@ export function userData(
           : [...userStateCryptoItems, action.cryptoData],
       }
     case EUserDataAtions.DeleteCryptoToUserData:
+      filtereditems = userCryptoItems.filter((value) => value.crypto.id !== action.cryptoId)
       return {
         ...state,
-        value: (state.value || 0) - cryptoItem.purchasePrice * cryptoItem.amount,
-        oldValue: (state.oldValue || 0) - cryptoItem.purchasePrice * cryptoItem.amount,
-        cryptoData: userCryptoItems.filter((value) => value.crypto.id !== action.cryptoId),
+        value:
+          filtereditems.length === 0
+            ? 0
+            : state.value - cryptoItem.purchasePrice * cryptoItem.amount,
+        oldValue:
+          filtereditems.length === 0
+            ? 0
+            : state.oldValue - cryptoItem.purchasePrice * cryptoItem.amount,
+        cryptoData: filtereditems,
       }
     default:
       return state

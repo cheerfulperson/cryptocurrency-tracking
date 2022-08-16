@@ -19,19 +19,21 @@ export const updateUserData = (storeAPI) => (next) => (action: UserDataActions) 
           },
         })
         .then((value) => {
-          const newCryptoData = cryptoData.slice()
           let newValue = 0
-          value.data.data.forEach((value, i) => {
-            if (newCryptoData[i]) {
-              newValue += Number(value.priceUsd) * newCryptoData[i].amount
-              newCryptoData[i].crypto = value
+          let newOldValue = 0
+          value.data.data.forEach((value) => {
+            const oldCryptoDataItem = cryptoData.find((crypto) => crypto.crypto.id === value.id);
+            if (oldCryptoDataItem) {
+              newOldValue += oldCryptoDataItem.purchasePrice * oldCryptoDataItem.amount
+              newValue += Number(value.priceUsd) * oldCryptoDataItem.amount
+              oldCryptoDataItem.crypto = value
             }
           })
           storeAPI.dispatch(
             setUserData({
               value: newValue,
-              oldValue: action.userData.oldValue,
-              cryptoData: newCryptoData,
+              oldValue: newOldValue,
+              cryptoData: cryptoData,
             }),
           )
         })
@@ -46,6 +48,7 @@ export const updateUserData = (storeAPI) => (next) => (action: UserDataActions) 
 
 export const addUserDataToStore = () => (next) => (action: UserDataActions) => {
   if (action.type === EUserDataAtions.SetUserData) {
+    console.log(action.userData);
     localStorage.setItem('userData', JSON.stringify(action.userData))
   }
   return next(action)

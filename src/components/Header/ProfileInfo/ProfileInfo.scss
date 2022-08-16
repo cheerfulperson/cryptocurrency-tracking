@@ -16,7 +16,27 @@
   }
 
   &__value {
+    position: relative;
     font-weight: 600;
+    cursor: pointer;
+  
+    &::after {
+      content: attr(data-value);
+      opacity: 0;
+      z-index: 0;
+      position: absolute;
+      left: 0;
+      padding: 5px;
+      color: white;
+      background-color: #adadad71;
+      transition: 0.3s;
+    }
+
+    &:hover::after{
+      opacity: 1;
+      z-index: 1;
+      transform: translate(0, 65%);
+    }
   }
 
   &__currency {

@@ -17,10 +17,12 @@ import { requestApi } from '../../api/api'
 import { AppState } from '../../redux/initialStates'
 import './Header.scss'
 import { deleteCryptoFromUserData } from '../../redux/actions/user-data.actions'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
 
 function Header() {
   const [isUserPanelOpen, setIsUserPanelOpen] = React.useState(false)
   const userData = useSelector((state: AppState) => state.userData)
+  const [, setUserData] = useLocalStorage('userData', userData)
   const location = useLocation()
   const history = useNavigate()
   const dispatch = useDispatch()
@@ -37,6 +39,13 @@ function Header() {
   function handleSellClick(cryptoId: string) {
     dispatch(deleteCryptoFromUserData(cryptoId));
   }
+
+  
+  React.useEffect(() => {
+    if (userData) {
+      setUserData(userData)
+    }
+  }, [userData])
 
   return (
     <>
