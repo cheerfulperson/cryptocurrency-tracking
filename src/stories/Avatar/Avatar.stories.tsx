@@ -10,10 +10,10 @@ export default {
   argTypes: { onClick: { action: 'clicked' } },
 } as ComponentMeta<typeof Avatar>
 
-const ListTemplate: ComponentStory<typeof Avatar> = (props) => <Avatar {...props} />
+const AvatarTemplate: ComponentStory<typeof Avatar> = (props) => <Avatar {...props} />
 let rotate = 1
 
-export const Default = ListTemplate.bind({})
+export const Default = AvatarTemplate.bind({})
 Default.args = {
   src: avatar,
   onClick: (e) => {
@@ -23,7 +23,7 @@ Default.args = {
   },
 }
 
-export const Pinned = ListTemplate.bind({})
+export const Pinned = AvatarTemplate.bind({})
 Pinned.args = {
   ...Default.args,
   styles: {
@@ -31,7 +31,7 @@ Pinned.args = {
   },
 }
 
-export const Archived = ListTemplate.bind({})
+export const Archived = AvatarTemplate.bind({})
 Archived.args = {
   ...Default.args,
 }
