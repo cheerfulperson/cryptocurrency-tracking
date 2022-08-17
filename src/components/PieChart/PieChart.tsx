@@ -13,17 +13,21 @@ import { UsersCrypto } from '../../models/user.model'
 
 interface PieChartProps {
   data: UsersCrypto[]
+  height?: number
+  width?: number
+  innerRadius?: number
+  outerRadius?: number
 }
 
 const { useEffect, useRef } = React
 
-function PieChart({ data: cryptoData }: PieChartProps) {
+function PieChart({ data: cryptoData, height: propHeight, width: propWidth, innerRadius: propInnerRadius, outerRadius: propOuterRadius }: PieChartProps) {
   const ref = useRef(null)
   const cache = useRef(cryptoData.map((el) => el.amount * +el.crypto.priceUsd))
-  const height = 300
-  const width = 400
-  const innerRadius = 50
-  const outerRadius = 100
+  const height = propHeight ?? 300
+  const width = propWidth ?? 400
+  const innerRadius = propInnerRadius ?? 50
+  const outerRadius = propOuterRadius ?? 100
   const createPie = pie()
     .value((d: object | number) => +d)
     .sort(null)
@@ -61,17 +65,18 @@ function PieChart({ data: cryptoData }: PieChartProps) {
     path
       .attr('class', 'arc')
       .attr('fill', (d, i) => colors(`${i}`))
-      .transition()
+      .attr('data-arc-value', (d) => d.value)
+      .transition('0.2')
       .attrTween('d', arcTween)
 
     const text = groupWithUpdate.append('text').merge(groupWithData.select('text'))
-
+    console.log(cryptoData)
     text
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
       .style('fill', 'white')
       .style('font-size', 10)
-      .transition()
+      .transition('0.2')
       .attr('transform', (d) => {
         const translate: DefaultArcObject = {
           innerRadius: innerRadius,
