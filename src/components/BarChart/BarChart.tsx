@@ -32,7 +32,7 @@ export function BarChart({ data }: BarChartProps) {
   const chart = useRef<SVGGElement>()
   const chartToolkit = useRef<HTMLDivElement>()
   const scaleX = scaleBand()
-    .domain(cryptoHistory.map(({ time }) => time))
+    .domain(cryptoHistory.map(({ time }) => `${time}`))
     .range([0, width])
     .padding(0.1)
   const scaleY = scaleLinear()

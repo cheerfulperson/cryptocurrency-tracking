@@ -36,10 +36,10 @@ export default function Bars({ data, height, scaleX, scaleY, toolkitRef }: BarsP
         return (
           <rect
             key={`bar-${priceUsd}`}
-            x={scaleX(time)}
-            y={scaleY(priceUsd) - 1}
+            x={scaleX(`${time}`)}
+            y={scaleY(+priceUsd) - 1}
             width={scaleX.bandwidth()}
-            height={height - scaleY(priceUsd)}
+            height={height - scaleY(+priceUsd)}
             className='bar-chart__rect'
             onMouseOver={(e) => onMouseOver(e, priceUsd)}
             onMouseLeave={() => onMouseLeave()}

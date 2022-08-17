@@ -18,6 +18,7 @@ import { AppState } from '../../redux/initialStates'
 import './Header.scss'
 import { deleteCryptoFromUserData } from '../../redux/actions/user-data.actions'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
+import PieChart from '../PieChart/PieChart'
 
 function Header() {
   const [isUserPanelOpen, setIsUserPanelOpen] = React.useState(false)
@@ -84,6 +85,7 @@ function Header() {
           <ProfileInfo info={userData} />
         </div>
         <article className='user-panel__currency-list'>
+        <PieChart data={userData.cryptoData}/>
           {userData.cryptoData.map((userCrypto) => (
             <article key={userCrypto.crypto.id} className='profile-item'>
               <h2 className='profile-item__title'>{userCrypto.crypto.name}</h2>
