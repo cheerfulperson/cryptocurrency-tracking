@@ -6,11 +6,12 @@ interface ListItemProps {
   [key: string]: any
   styles?: React.CSSProperties
   children?: JSX.Element[] | JSX.Element
+  className?: string
 }
 
-function ListItem({ styles, children, ...props }: ListItemProps) {
+function ListItem({ styles, className, children, ...props }: ListItemProps) {
   return (
-    <li className='list-item' style={styles} {...props}>
+    <li className={`list-item ${className ? className : ''}`} style={styles} {...props}>
       {children}
     </li>
   )
