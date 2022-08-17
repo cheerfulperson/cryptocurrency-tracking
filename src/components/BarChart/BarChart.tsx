@@ -9,8 +9,17 @@ import AxisLeft from './AxisLeft/AxisLeft'
 
 const { useRef, useEffect, useState } = React
 
+export interface BarChartMargin {
+  top: number
+  right: number
+  bottom: number
+  left: number
+}
 interface BarChartProps {
   data: CryptoHistory[]
+  margin?: BarChartMargin
+  height?: number
+  width?: number
 }
 
 interface MouseState {
@@ -18,16 +27,22 @@ interface MouseState {
   mouseUpX: number
 }
 
-export function BarChart({ data }: BarChartProps) {
+export function BarChart({
+  data,
+  margin: propMargin,
+  width: propWidth,
+  height: propHeight,
+}: BarChartProps) {
   const rectAmount = 20
   const [chartSize, setChartSize] = useState<number>(getChartSize())
   const [scrollPosition, setScrollPosition] = useState<number>(data.length)
   const [cryptoHistory, setCryptoHistory] = useState(
     data.slice(scrollPosition - rectAmount, scrollPosition),
   )
-  const margin = { top: 10, right: 20, bottom: 60, left: 60 }
-  const width = chartSize - margin.left - margin.right
-  const height = 400 - margin.top - margin.bottom
+
+  const margin = propMargin ? propMargin : { top: 10, right: 20, bottom: 60, left: 60 }
+  const width = propWidth ? propWidth : chartSize - margin.left - margin.right
+  const height = propHeight ? propHeight : 400 - margin.top - margin.bottom
   const maxPrice = Math.max(...cryptoHistory.map(({ priceUsd }) => +priceUsd))
   const chart = useRef<SVGGElement>()
   const chartToolkit = useRef<HTMLDivElement>()
@@ -103,7 +118,7 @@ export function BarChart({ data }: BarChartProps) {
       ((mouseState.mouseDownX - mouseState.mouseUpX) / width) * rectAmount,
     )
     const newScrollPosition = scrollPosition + newElementsAmount
-    if (data[newScrollPosition - 1] && newScrollPosition >= 0) {
+    if (data[newScrollPosition - 1] && newScrollPosition - rectAmount >= 0) {
       setScrollPosition(newScrollPosition)
       setCryptoHistory(data.slice(newScrollPosition - rectAmount, newScrollPosition))
     }

@@ -48,7 +48,6 @@ export const updateUserData = (storeAPI) => (next) => (action: UserDataActions) 
 
 export const addUserDataToStore = () => (next) => (action: UserDataActions) => {
   if (action.type === EUserDataAtions.SetUserData) {
-    console.log(action.userData);
     localStorage.setItem('userData', JSON.stringify(action.userData))
   }
   return next(action)
