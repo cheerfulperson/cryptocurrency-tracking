@@ -1,4 +1,5 @@
-import { requestApi } from '../../api/api'
+import { queryCryptoAssets } from '../../api/api'
+import { CryptoAssets } from '../../models/crypto.models'
 import {
   ECryptoAtions,
   invalidLoadCrypto,
@@ -11,20 +12,17 @@ export const fetchCrypto = (storeAPI) => (next) => (action: CryptoActions) => {
     try {
       const { pages } = storeAPI.getState().homeCrypto
       if (pages === 0) {
-        requestApi.get('assets').then((assets) => {
-          const pagesAmount = Math.floor(assets.data.data.length / 10) - 1
-          storeAPI.dispatch(receiveCrypto(assets.data.data.slice(0, 10), pagesAmount))
-        })
-      } else {
-        requestApi
-          .get('assets', {
-            params: {
-              offset: action.offset * 10,
-              limit: 10,
-            },
-          })
+        queryCryptoAssets(0, 100, false)
           .then((assets) => {
-            storeAPI.dispatch(receiveCrypto(assets.data.data, pages))
+            const cryptoInfo = assets.data.cryptoAssets as CryptoAssets[];
+            const pagesAmount = Math.floor(cryptoInfo.length / 10) - 1
+            storeAPI.dispatch(receiveCrypto(cryptoInfo.slice(0, 10), pagesAmount))
+          })
+      } else {
+        queryCryptoAssets(action.offset * 10, 10, false)
+          .then((assets) => {
+            const cryptoInfo = assets.data.cryptoAssets as CryptoAssets[];
+            storeAPI.dispatch(receiveCrypto(cryptoInfo, pages))
           })
       }
     } catch (error) {

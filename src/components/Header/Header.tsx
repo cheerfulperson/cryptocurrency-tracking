@@ -13,12 +13,12 @@ import Modal from '../Modal/Modal'
 import { getToFixedPrice } from '../../utils/cummon'
 import userImg from '../../assets/avatar.png'
 import { useQuery } from '@tanstack/react-query'
-import { requestApi } from '../../api/api'
 import { AppState } from '../../redux/initialStates'
-import './Header.scss'
 import { deleteCryptoFromUserData } from '../../redux/actions/user-data.actions'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import PieChart from '../PieChart/PieChart'
+import { queryCryptoAssets } from '../../api/api'
+import './Header.scss'
 
 function Header() {
   const [isUserPanelOpen, setIsUserPanelOpen] = React.useState(false)
@@ -30,10 +30,8 @@ function Header() {
   const isHomePathName = location.pathname === '' || location.pathname === '/'
 
   const getCrypto = async () => {
-    const res = await requestApi.get('assets', {params: {
-      ids: ['bitcoin', 'ethereum', 'monero'].join(',')
-    }})
-    return res.data.data
+    const res = await queryCryptoAssets(0, 2000, false, ['bitcoin', 'ethereum', 'monero'])
+    return res.data.cryptoAssets as CryptoAssets[]
   }
   const { isLoading, data: cryptocurrencies } = useQuery<CryptoAssets[]>([null], getCrypto)
 

@@ -1,5 +1,5 @@
 import { CryptoAssets, CryptoHistory } from '../../models/crypto.models'
-import { getToFixedNumber } from '../../utils/cummon'
+import { getToFixedPrice } from '../../utils/cummon'
 import { SelectedCryptoState } from '../initialStates'
 
 export enum ESelectedCryptoAtions {
@@ -25,10 +25,11 @@ export function invalidLoadSelectedCrypto(error: null | string) {
 
 export function receiveSelectedCrypto(payload: CryptoAssets | null, history: CryptoHistory[] | null) {
   const filterdHistory = (history || []).map((value) => {
-    const time = new Date(value.time)
-    value.priceUsd = Number(value.priceUsd).toFixed(getToFixedNumber(value.priceUsd))
-    value.time = `${time.getFullYear()}-${time.getMonth()}-${time.getDate()}`
-    return value
+    const story = Object.assign({}, value);
+    const time = new Date(+story.time)
+    story.priceUsd = getToFixedPrice(value.priceUsd)
+    story.time = `${time.getFullYear()}-${time.getMonth()}-${time.getDate()}`
+    return story
   })
   return {
     type: ESelectedCryptoAtions.ReceiveCrypto,

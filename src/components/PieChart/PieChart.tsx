@@ -70,7 +70,6 @@ function PieChart({ data: cryptoData, height: propHeight, width: propWidth, inne
       .attrTween('d', arcTween)
 
     const text = groupWithUpdate.append('text').merge(groupWithData.select('text'))
-    console.log(cryptoData)
     text
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')

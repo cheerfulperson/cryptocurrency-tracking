@@ -1,4 +1,5 @@
-import { requestApi } from '../../api/api'
+// import { requestApi } from '../../api/api'
+import { queryCryptoAssets } from '../../api/api'
 import { CryptoAssets } from '../../models/crypto.models'
 import {
   EUserDataAtions,
@@ -11,17 +12,13 @@ export const updateUserData = (storeAPI) => (next) => (action: UserDataActions) 
   if (action.type === EUserDataAtions.LoadUserData) {
     try {
       const { cryptoData } = action.userData
-      const cryptoIds = cryptoData.map((value) => value.crypto.id).join(',')
-      requestApi
-        .get<{ data: CryptoAssets[] }>('assets', {
-          params: {
-            ids: cryptoIds,
-          },
-        })
+      const cryptoIds = cryptoData.map((value) => value.crypto.id)
+      queryCryptoAssets(0, 2000, false, cryptoIds)
         .then((value) => {
+          const cryptoInfo = value.data.cryptoAssets as CryptoAssets[];
           let newValue = 0
           let newOldValue = 0
-          value.data.data.forEach((value) => {
+          cryptoInfo.forEach((value) => {
             const oldCryptoDataItem = cryptoData.find((crypto) => crypto.crypto.id === value.id);
             if (oldCryptoDataItem) {
               newOldValue += oldCryptoDataItem.purchasePrice * oldCryptoDataItem.amount

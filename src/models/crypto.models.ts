@@ -10,8 +10,15 @@ export interface CryptoAssets {
   priceUsd: number | string
   changePercent24Hr: number | string
   vwap24Hr: number | string
+  history?: CryptoHistory[]
 }
 
+export interface CryptoAssetsResponse {
+  cryptoAssets: CryptoAssets[] | CryptoAssets | null
+}
+export interface CryptoAssetResponse {
+  cryptoAsset: CryptoAssets | null
+}
 export interface CryptoHistory {
   priceUsd: string
   time: number | string
@@ -32,4 +39,3 @@ export interface HeaderCryptoInfo {
 export interface CryptoInfo extends HeaderCryptoInfo {
   name: string
 }
-
