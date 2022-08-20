@@ -4,7 +4,7 @@
     "module": "CommonJS",
     "target": "es6",
     "jsx": "react",
-    "types": ["jest", "node"],
+    "types": ["jest", "node", "cypress", "cypress-plugin-snapshots"],
     "moduleResolution": "node",
     "strict": true,
     "sourceMap": true,

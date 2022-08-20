@@ -28,7 +28,8 @@
     "webpack.*",
     "*.d.ts",
     "*.test.ts",
-    "jest.*.js"
+    "jest.*.js",
+    "*.cy.ts"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
